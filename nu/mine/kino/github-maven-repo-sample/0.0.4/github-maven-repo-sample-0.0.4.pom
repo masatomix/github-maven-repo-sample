@@ -97,7 +97,7 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 					<!-- github repo name -->
 					<repositoryOwner>masatomix</repositoryOwner>
 					<!-- github username -->
-					<merge>true</merge>  <!-- 履歴を残す。これがないと、直近バージョンしかrepositoryに残らない -->
+					<merge>false</merge>  <!-- 履歴を残す。これがないと、直近バージョンしかrepositoryに残らない -->
 				</configuration>
 				<executions>
 					<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
