@@ -29,7 +29,7 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 
 	<!--
 	distributionManagement の記述。これを書くだけで、
-	# mvn clean deployで、target/maven-repo 配下に、リポジトリが作成されるようになる
+	# mvn clean deployで、target/repository 配下に、リポジトリが作成されるようになる
 	-->
 	<distributionManagement>
 		<repository>
