@@ -11,7 +11,7 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
     <repositories>
         <repository>
             <id>my-maven-repo</id>
-            <url>https://raw.github.com/masatomix/maven-repo/maven-repo/</url>
+            <url>https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo/</url>
         </repository>
     </repositories>
 で、さらにpom.xmlで、
