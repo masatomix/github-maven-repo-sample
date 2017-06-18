@@ -95,7 +95,7 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 					</includes>
 					<repositoryName>github-maven-repo-sample</repositoryName><!-- Github上のどのプロジェクトにアップするか。別のプロジェクトも選べる -->
 					<!-- github repo name -->
-					<repositoryOwner>masatomix</repositoryOwner>
+					<repositoryOwner>YOUR-USERNAME</repositoryOwner>
 					<!-- github username -->
 					<merge>true</merge>  <!-- 履歴を残す。これがないと、直近バージョンしかrepositoryに残らない -->
 				</configuration>
