@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!-- 
+https://raw.github.com/YOUR-USERNAME/YOUR-PROJECT-NAME/maven-repo
+たとえば
+https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
+をリポジトリとするためのサンプルのpom.xml
+# mvn clean deployとすることで、上記のURLに、mavenのリポジトリが作成される。
+
+そのrepositoryのjarを参照したいプロジェクトからは、pom.xmlで下記のrepositoryを定義した上で、
+    <repositories>
+        <repository>
+            <id>my-maven-repo</id>
+            <url>https://raw.github.com/masatomix/maven-repo/maven-repo/</url>
+        </repository>
+    </repositories>
+で、さらにpom.xmlで、
+	<dependency>
+		<groupId>nu.mine.kino</groupId>
+		<artifactId>github-maven-repo-sample</artifactId>
+		<version>0.0.1</version>
+	</dependency>
+と書くことができます。
+-->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>nu.mine.kino</groupId>
+	<artifactId>github-maven-repo-sample</artifactId>
+	<version>0.0.4</version>
+
+	<!--
+	distributionManagement の記述。これを書くだけで、
+	# mvn clean deployで、target/maven-repo 配下に、リポジトリが作成されるようになる
+	-->
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/repository</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<!-- github server corresponds to entry in ~/.m2/settings.xml -->
+		<!-- 
+		$ cat ~/.m2/settings.xml
+		<settings>
+		  <servers>
+            <server>
+            ..
+            </server>
+            <server>
+              <id>github</id>
+                <username>YOUR-USERNAME</username>
+                <password>xxxxxxxxx</password>
+           </server>
+         </servers>
+       </settings>
+		 -->
+		<github.global.server>github</github.global.server>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.2</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/repository</altDeploymentRepository>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.11</version>
+				<configuration>
+					<message>Maven artifacts for ${project.version}</message>
+					<!-- git commit message -->
+					<noJekyll>true</noJekyll>
+					<!-- disable webpage processing -->
+					<outputDirectory>${project.build.directory}/repository</outputDirectory>
+					<!-- matches distribution management repository url above -->
+					<branch>refs/heads/maven-repo</branch>
+					<!-- remote branch name -->
+					<includes>
+						<include>**/*</include>
+					</includes>
+					<repositoryName>github-maven-repo-sample</repositoryName><!-- Github上のどのプロジェクトにアップするか。別のプロジェクトも選べる -->
+					<!-- github repo name -->
+					<repositoryOwner>masatomix</repositoryOwner>
+					<!-- github username -->
+					<merge>true</merge>  <!-- 履歴を残す。これがないと、直近バージョンしかrepositoryに残らない -->
+				</configuration>
+				<executions>
+					<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
