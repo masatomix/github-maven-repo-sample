@@ -84,7 +84,7 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 				<configuration>
 					<message>Maven artifacts for ${project.version}</message>
 					<!-- git commit message -->
-					<noJekyll>false</noJekyll>
+					<noJekyll>true</noJekyll>
 					<!-- disable webpage processing -->
 					<outputDirectory>${project.build.directory}/repository</outputDirectory>
 					<!-- matches distribution management repository url above -->
@@ -97,7 +97,7 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 					<!-- github repo name -->
 					<repositoryOwner>masatomix</repositoryOwner>
 					<!-- github username -->
-					<merge>false</merge>  <!-- 履歴を残す。これがないと、直近バージョンしかrepositoryに残らない -->
+					<merge>true</merge>  <!-- 履歴を残す。これがないと、直近バージョンしかrepositoryに残らない -->
 				</configuration>
 				<executions>
 					<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
