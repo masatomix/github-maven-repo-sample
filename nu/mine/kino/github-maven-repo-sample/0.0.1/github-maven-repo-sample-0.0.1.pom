@@ -7,6 +7,20 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 をリポジトリとするためのサンプルのpom.xml
 # mvn clean deployとすることで、上記のURLに、mavenのリポジトリが作成される。
 
+そのrepositoryのjarを参照したいプロジェクトからは、pom.xmlで下記のrepositoryを定義した上で、
+    <repositories>
+        <repository>
+            <id>my-maven-repo</id>
+            <url>https://raw.github.com/masatomix/maven-repo/maven-repo/</url>
+        </repository>
+    </repositories>
+で、さらにpom.xmlで、
+	<dependency>
+		<groupId>nu.mine.kino</groupId>
+		<artifactId>github-maven-repo-sample</artifactId>
+		<version>0.0.1</version>
+	</dependency>
+と書くことができます。
 -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nu.mine.kino</groupId>
@@ -79,14 +93,13 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 					<includes>
 						<include>**/*</include>
 					</includes>
-					<repositoryName>github-maven-repo-sample</repositoryName><!-- Github上のどのプロジェクトにアップするか。 -->
+					<repositoryName>github-maven-repo-sample</repositoryName><!-- Github上のどのプロジェクトにアップするか。別のプロジェクトも選べる -->
 					<!-- github repo name -->
 					<repositoryOwner>masatomix</repositoryOwner>
 					<!-- github username -->
 				</configuration>
 				<executions>
-					<!-- run site-maven-plugin's 'site' target as part of the build's normal
-						'deploy' phase -->
+					<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
 					<execution>
 						<goals>
 							<goal>site</goal>
