@@ -25,7 +25,7 @@ https://raw.github.com/masatomix/github-maven-repo-sample/maven-repo
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nu.mine.kino</groupId>
 	<artifactId>github-maven-repo-sample</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 
 	<!--
 	distributionManagement の記述。これを書くだけで、
